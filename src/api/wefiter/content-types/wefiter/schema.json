@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "wefiters",
+  "info": {
+    "singularName": "wefiter",
+    "pluralName": "wefiters",
+    "displayName": "Wefiter",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "dob": {
+      "type": "date"
+    },
+    "job_activity": {
+      "type": "enumeration",
+      "enum": ["developer", "qa", "designer"],
+      "required": false
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "wefiter"
+    },
+    "phone": {
+      "type": "string",
+      "unique": true
+    }
+  }
+}
