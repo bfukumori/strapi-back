@@ -1,0 +1,54 @@
+{
+  "kind": "collectionType",
+  "collectionName": "work_activities",
+  "info": {
+    "singularName": "work-activity",
+    "pluralName": "work-activities",
+    "displayName": "Work Activity",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "currentEstimatedHours": {
+      "type": "integer",
+      "required": true
+    },
+    "project": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project.project",
+      "inversedBy": "work_activities"
+    },
+    "details": {
+      "type": "blocks"
+    },
+    "activity_status": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::activity-status.activity-status",
+      "inversedBy": "work_activities"
+    },
+    "register_hours": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::register-hour.register-hour",
+      "mappedBy": "work_activity"
+    },
+    "initialEstimatedHours": {
+      "type": "integer",
+      "required": true
+    },
+    "project_sections": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::project-section.project-section",
+      "mappedBy": "work_activity"
+    }
+  }
+}

@@ -1,22 +1,24 @@
 {
-  "name": "strapi-back",
+  "name": "wefit-pae-backend",
   "version": "0.1.0",
   "private": true,
-  "description": "A Strapi application",
+  "description": "Backend for the PAE project of the Wefit team.",
+  "author": "Bruno Fukumori",
   "scripts": {
     "build": "strapi build",
     "console": "strapi console",
     "deploy": "strapi deploy",
     "dev": "strapi develop",
     "develop": "strapi develop",
-    "seed:example": "node ./scripts/seed.js",
+    "seed": "node ./scripts/seed.js",
     "start": "strapi start",
     "strapi": "strapi",
-    "upgrade": "npx @strapi/upgrade latest",
-    "upgrade:dry": "npx @strapi/upgrade latest --dry"
+    "upgrade": "pnpm dlx @strapi/upgrade latest",
+    "upgrade:dry": "pnpm dlx @strapi/upgrade latest --dry"
   },
   "dependencies": {
     "@strapi/plugin-cloud": "5.12.4",
+    "@strapi/plugin-documentation": "^5.12.4",
     "@strapi/plugin-users-permissions": "5.12.4",
     "@strapi/strapi": "5.12.4",
     "better-sqlite3": "11.9.1",
@@ -32,7 +34,7 @@
     "@types/react": "^18.3.20",
     "@types/react-dom": "^18.3.6",
     "typescript": "^5.8.3",
-    "vite": "^6.2.5"
+    "vite": "^6.2.6"
   },
   "engines": {
     "node": ">=18.0.0 <=22.x.x",

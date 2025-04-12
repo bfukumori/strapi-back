@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "work_profiles",
+  "info": {
+    "singularName": "work-profile",
+    "pluralName": "work-profiles",
+    "displayName": "Work Profile",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "bgColor": {
+      "type": "string",
+      "required": true
+    },
+    "textColor": {
+      "type": "string",
+      "required": true
+    },
+    "wefiters": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::wefiter.wefiter",
+      "inversedBy": "work_profiles"
+    },
+    "register_hours": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::register-hour.register-hour",
+      "mappedBy": "work_profile"
+    },
+    "allocations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::allocation.allocation",
+      "mappedBy": "work_profile"
+    }
+  }
+}

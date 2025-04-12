@@ -18,11 +18,6 @@
     "dob": {
       "type": "date"
     },
-    "job_activity": {
-      "type": "enumeration",
-      "enum": ["developer", "qa", "designer"],
-      "required": false
-    },
     "users_permissions_user": {
       "type": "relation",
       "relation": "oneToOne",
@@ -32,6 +27,53 @@
     "phone": {
       "type": "string",
       "unique": true
+    },
+    "privateEmail": {
+      "type": "email",
+      "unique": true
+    },
+    "discordId": {
+      "type": "string",
+      "unique": true
+    },
+    "gender": {
+      "type": "enumeration",
+      "enum": [
+        "Masculino",
+        "Feminino",
+        "Não-binário"
+      ]
+    },
+    "socialName": {
+      "type": "string"
+    },
+    "isPartner": {
+      "type": "boolean",
+      "default": false
+    },
+    "job_contract": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::job-contract.job-contract",
+      "mappedBy": "wefiter"
+    },
+    "register_hours": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::register-hour.register-hour",
+      "mappedBy": "wefiter"
+    },
+    "allocations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::allocation.allocation",
+      "mappedBy": "wefiter"
+    },
+    "work_profiles": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::work-profile.work-profile",
+      "mappedBy": "wefiters"
     }
   }
 }

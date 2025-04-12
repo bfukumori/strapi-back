@@ -1,0 +1,158 @@
+{
+  "kind": "collectionType",
+  "collectionName": "job_contracts",
+  "info": {
+    "singularName": "job-contract",
+    "pluralName": "job-contracts",
+    "displayName": "Job Contract",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "wefiter": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::wefiter.wefiter",
+      "inversedBy": "job_contract"
+    },
+    "placeOfBirth": {
+      "type": "string",
+      "required": false
+    },
+    "rg": {
+      "type": "string",
+      "required": false,
+      "unique": true
+    },
+    "pis": {
+      "type": "string",
+      "unique": true
+    },
+    "ctps": {
+      "type": "string",
+      "unique": true
+    },
+    "ctpsSeries": {
+      "type": "string",
+      "unique": false
+    },
+    "voterId": {
+      "type": "string",
+      "unique": true
+    },
+    "voterZone": {
+      "type": "string"
+    },
+    "voterSection": {
+      "type": "string"
+    },
+    "motherName": {
+      "type": "string"
+    },
+    "fatherName": {
+      "type": "string"
+    },
+    "bankName": {
+      "type": "string",
+      "unique": true
+    },
+    "bankAgency": {
+      "type": "string"
+    },
+    "bankAccount": {
+      "type": "string"
+    },
+    "bankAccountType": {
+      "type": "enumeration",
+      "enum": [
+        "Conta Corrente",
+        "Conta Poupança",
+        "Conta Salário"
+      ]
+    },
+    "maritalStatus": {
+      "type": "enumeration",
+      "enum": [
+        "Solteiro",
+        "Casado",
+        "Divorciado"
+      ]
+    },
+    "ctpsIssueDate": {
+      "type": "date"
+    },
+    "rgIssueDate": {
+      "type": "date"
+    },
+    "education": {
+      "type": "enumeration",
+      "enum": [
+        "Ensino Médio Completo",
+        "Ensino Superior Cursando",
+        "Ensino Superior Incompleto",
+        "Ensino Superior Completo",
+        "Pós Graduação Cursando",
+        "Pós Graduação Incompleto",
+        "Pós Graduação Completo",
+        "Mestrado",
+        "Doutorado",
+        "Pós Doutorado"
+      ]
+    },
+    "race": {
+      "type": "enumeration",
+      "enum": [
+        "Amarelo",
+        "Indígena",
+        "Branco",
+        "Preto",
+        "Pardo"
+      ]
+    },
+    "admissionDate": {
+      "type": "date",
+      "required": false
+    },
+    "contractType": {
+      "type": "enumeration",
+      "enum": [
+        "Híbrido",
+        "Presencial",
+        "Home Office"
+      ],
+      "required": false
+    },
+    "contractRegimen": {
+      "type": "enumeration",
+      "enum": [
+        "CLT",
+        "PJ",
+        "Estágio"
+      ],
+      "required": false
+    },
+    "hasTransport": {
+      "type": "boolean",
+      "required": false
+    },
+    "admissionExamDate": {
+      "type": "date"
+    },
+    "hasFoodCard": {
+      "type": "boolean"
+    },
+    "hasHealthCare": {
+      "type": "boolean"
+    },
+    "taxNumber": {
+      "type": "string",
+      "unique": true
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

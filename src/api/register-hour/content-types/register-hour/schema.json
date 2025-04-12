@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "register_hours",
+  "info": {
+    "singularName": "register-hour",
+    "pluralName": "register-hours",
+    "displayName": "Register Hour",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "work_activity": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::work-activity.work-activity",
+      "inversedBy": "register_hours"
+    },
+    "wefiter": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::wefiter.wefiter",
+      "inversedBy": "register_hours"
+    },
+    "executedHours": {
+      "type": "integer",
+      "required": true
+    },
+    "work_profile": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::work-profile.work-profile",
+      "inversedBy": "register_hours"
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "kind": "collectionType",
+  "collectionName": "projects",
+  "info": {
+    "singularName": "project",
+    "pluralName": "projects",
+    "displayName": "Project",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "finishedAt": {
+      "type": "date"
+    },
+    "startedAt": {
+      "type": "date"
+    },
+    "work_activities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::work-activity.work-activity",
+      "mappedBy": "project"
+    },
+    "projectStatus": {
+      "type": "enumeration",
+      "enum": [
+        "Em planejamento",
+        "Em andamento",
+        "Em validação",
+        "Aguardando aprovação",
+        "Pausado",
+        "Cancelado",
+        "Concluído"
+      ],
+      "default": "Em planejamento"
+    },
+    "startsAtPreview": {
+      "type": "date",
+      "required": true
+    },
+    "endsAtPreview": {
+      "type": "date",
+      "required": true
+    },
+    "totalHours": {
+      "type": "integer",
+      "required": true
+    },
+    "dueDate": {
+      "type": "date",
+      "required": true
+    },
+    "project_sections": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::project-section.project-section",
+      "mappedBy": "project"
+    },
+    "stakeholder": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::stakeholder.stakeholder",
+      "inversedBy": "projects"
+    },
+    "allocations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::allocation.allocation",
+      "mappedBy": "project"
+    }
+  }
+}
