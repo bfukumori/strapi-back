@@ -38,11 +38,7 @@
     },
     "gender": {
       "type": "enumeration",
-      "enum": [
-        "Masculino",
-        "Feminino",
-        "Não-binário"
-      ]
+      "enum": ["Masculino", "Feminino", "Não-binário"]
     },
     "socialName": {
       "type": "string"

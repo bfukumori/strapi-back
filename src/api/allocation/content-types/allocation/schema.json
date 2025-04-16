@@ -11,16 +11,11 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "startDate": {
-      "type": "date",
-      "required": true
-    },
-    "endDate": {
-      "type": "date"
-    },
     "hoursPerDay": {
       "type": "integer",
-      "required": true
+      "required": true,
+      "max": 8,
+      "default": 8
     },
     "project": {
       "type": "relation",
@@ -34,17 +29,17 @@
       "target": "api::wefiter.wefiter",
       "inversedBy": "allocations"
     },
-    "project_sections": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::project-section.project-section",
-      "inversedBy": "allocations"
-    },
     "work_profile": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::work-profile.work-profile",
       "inversedBy": "allocations"
+    },
+    "workDaysPerWeek": {
+      "type": "integer",
+      "required": true,
+      "max": 5,
+      "default": 5
     }
   }
 }

@@ -61,6 +61,7 @@ async function createEntry({ model, entry }) {
   try {
     await strapi.documents(`api::${model}.${model}`).create({
       data: entry,
+      status: 'published',
     });
   } catch (error) {
     console.error({ model, entry, error });
@@ -82,6 +83,15 @@ async function importWorkProfiles() {
 async function importSeedData() {
   await setPublicPermissions({
     'activity-status': ['find', 'findOne'],
+    allocation: ['find', 'findOne'],
+    'job-contract': ['find', 'findOne'],
+    project: ['find', 'findOne'],
+    'project-section': ['find', 'findOne'],
+    'register-hour': ['find', 'findOne'],
+    stakeholder: ['find', 'findOne'],
+    wefiter: ['find', 'findOne'],
+    'work-activity': ['find', 'findOne'],
+    'work-activity-estimative': ['find', 'findOne'],
     'work-profile': ['find', 'findOne'],
   });
 

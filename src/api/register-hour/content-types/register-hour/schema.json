@@ -15,12 +15,6 @@
       "type": "date",
       "required": true
     },
-    "work_activity": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::work-activity.work-activity",
-      "inversedBy": "register_hours"
-    },
     "wefiter": {
       "type": "relation",
       "relation": "manyToOne",
@@ -30,6 +24,24 @@
     "executedHours": {
       "type": "integer",
       "required": true
+    },
+    "work_activity": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::work-activity.work-activity",
+      "inversedBy": "register_hours"
+    },
+    "project": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project.project",
+      "inversedBy": "register_hours"
+    },
+    "project_section": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project-section.project-section",
+      "inversedBy": "register_hours"
     },
     "work_profile": {
       "type": "relation",

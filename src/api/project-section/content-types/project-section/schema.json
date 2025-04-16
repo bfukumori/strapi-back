@@ -21,17 +21,17 @@
       "target": "api::project.project",
       "inversedBy": "project_sections"
     },
-    "allocations": {
+    "work_activities": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::allocation.allocation",
+      "target": "api::work-activity.work-activity",
       "mappedBy": "project_sections"
     },
-    "work_activity": {
+    "register_hours": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::work-activity.work-activity",
-      "inversedBy": "project_sections"
+      "relation": "oneToMany",
+      "target": "api::register-hour.register-hour",
+      "mappedBy": "project_section"
     }
   }
 }

@@ -4,7 +4,4 @@ export default {
     maxLimit: 100,
     withCount: true,
   },
-  responses: {
-    privateAttributes: ['createdAt', 'updatedAt', 'publishedAt'],
-  },
 };

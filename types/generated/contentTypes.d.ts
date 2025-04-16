@@ -421,8 +421,15 @@ export interface ApiAllocationAllocation extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    endDate: Schema.Attribute.Date;
-    hoursPerDay: Schema.Attribute.Integer & Schema.Attribute.Required;
+    hoursPerDay: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 8;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<8>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -430,12 +437,7 @@ export interface ApiAllocationAllocation extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     project: Schema.Attribute.Relation<'manyToOne', 'api::project.project'>;
-    project_sections: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::project-section.project-section'
-    >;
     publishedAt: Schema.Attribute.DateTime;
-    startDate: Schema.Attribute.Date & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -444,6 +446,15 @@ export interface ApiAllocationAllocation extends Struct.CollectionTypeSchema {
       'manyToOne',
       'api::work-profile.work-profile'
     >;
+    workDaysPerWeek: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<5>;
   };
 }
 
@@ -540,10 +551,6 @@ export interface ApiProjectSectionProjectSection
     draftAndPublish: true;
   };
   attributes: {
-    allocations: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::allocation.allocation'
-    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -556,11 +563,15 @@ export interface ApiProjectSectionProjectSection
     name: Schema.Attribute.String & Schema.Attribute.Required;
     project: Schema.Attribute.Relation<'manyToOne', 'api::project.project'>;
     publishedAt: Schema.Attribute.DateTime;
+    register_hours: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::register-hour.register-hour'
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    work_activity: Schema.Attribute.Relation<
-      'manyToOne',
+    work_activities: Schema.Attribute.Relation<
+      'manyToMany',
       'api::work-activity.work-activity'
     >;
   };
@@ -587,8 +598,7 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     description: Schema.Attribute.Blocks;
     dueDate: Schema.Attribute.Date & Schema.Attribute.Required;
-    endsAtPreview: Schema.Attribute.Date & Schema.Attribute.Required;
-    finishedAt: Schema.Attribute.Date;
+    endDate: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -613,13 +623,15 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.DefaultTo<'Em planejamento'>;
     publishedAt: Schema.Attribute.DateTime;
+    register_hours: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::register-hour.register-hour'
+    >;
     stakeholder: Schema.Attribute.Relation<
       'manyToOne',
       'api::stakeholder.stakeholder'
     >;
-    startedAt: Schema.Attribute.Date;
-    startsAtPreview: Schema.Attribute.Date & Schema.Attribute.Required;
-    totalHours: Schema.Attribute.Integer & Schema.Attribute.Required;
+    startDate: Schema.Attribute.Date;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -654,6 +666,11 @@ export interface ApiRegisterHourRegisterHour
       'api::register-hour.register-hour'
     > &
       Schema.Attribute.Private;
+    project: Schema.Attribute.Relation<'manyToOne', 'api::project.project'>;
+    project_section: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::project-section.project-section'
+    >;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -685,10 +702,6 @@ export interface ApiStakeholderStakeholder extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    details: Schema.Attribute.Text &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 500;
-      }>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -764,6 +777,46 @@ export interface ApiWefiterWefiter extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiWorkActivityEstimativeWorkActivityEstimative
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'work_activity_estimatives';
+  info: {
+    description: '';
+    displayName: 'Work Activity Estimative';
+    pluralName: 'work-activity-estimatives';
+    singularName: 'work-activity-estimative';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    adjustedEstimate: Schema.Attribute.Integer;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dateOfAdjustment: Schema.Attribute.Date;
+    estimatedHours: Schema.Attribute.Integer & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::work-activity-estimative.work-activity-estimative'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    work_activity: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::work-activity.work-activity'
+    >;
+    work_profile: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::work-profile.work-profile'
+    >;
+  };
+}
+
 export interface ApiWorkActivityWorkActivity
   extends Struct.CollectionTypeSchema {
   collectionName: 'work_activities';
@@ -784,9 +837,7 @@ export interface ApiWorkActivityWorkActivity
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    currentEstimatedHours: Schema.Attribute.Integer & Schema.Attribute.Required;
     details: Schema.Attribute.Blocks;
-    initialEstimatedHours: Schema.Attribute.Integer & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -796,7 +847,7 @@ export interface ApiWorkActivityWorkActivity
     name: Schema.Attribute.String & Schema.Attribute.Required;
     project: Schema.Attribute.Relation<'manyToOne', 'api::project.project'>;
     project_sections: Schema.Attribute.Relation<
-      'oneToMany',
+      'manyToMany',
       'api::project-section.project-section'
     >;
     publishedAt: Schema.Attribute.DateTime;
@@ -807,6 +858,10 @@ export interface ApiWorkActivityWorkActivity
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    work_activity_estimatives: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::work-activity-estimative.work-activity-estimative'
+    >;
   };
 }
 
@@ -849,6 +904,10 @@ export interface ApiWorkProfileWorkProfile extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     wefiters: Schema.Attribute.Relation<'manyToMany', 'api::wefiter.wefiter'>;
+    work_activity_estimatives: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::work-activity-estimative.work-activity-estimative'
+    >;
   };
 }
 
@@ -1370,6 +1429,7 @@ declare module '@strapi/strapi' {
       'api::register-hour.register-hour': ApiRegisterHourRegisterHour;
       'api::stakeholder.stakeholder': ApiStakeholderStakeholder;
       'api::wefiter.wefiter': ApiWefiterWefiter;
+      'api::work-activity-estimative.work-activity-estimative': ApiWorkActivityEstimativeWorkActivityEstimative;
       'api::work-activity.work-activity': ApiWorkActivityWorkActivity;
       'api::work-profile.work-profile': ApiWorkProfileWorkProfile;
       'plugin::content-releases.release': PluginContentReleasesRelease;

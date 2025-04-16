@@ -66,19 +66,11 @@
     },
     "bankAccountType": {
       "type": "enumeration",
-      "enum": [
-        "Conta Corrente",
-        "Conta Poupança",
-        "Conta Salário"
-      ]
+      "enum": ["Conta Corrente", "Conta Poupança", "Conta Salário"]
     },
     "maritalStatus": {
       "type": "enumeration",
-      "enum": [
-        "Solteiro",
-        "Casado",
-        "Divorciado"
-      ]
+      "enum": ["Solteiro", "Casado", "Divorciado"]
     },
     "ctpsIssueDate": {
       "type": "date"
@@ -103,13 +95,7 @@
     },
     "race": {
       "type": "enumeration",
-      "enum": [
-        "Amarelo",
-        "Indígena",
-        "Branco",
-        "Preto",
-        "Pardo"
-      ]
+      "enum": ["Amarelo", "Indígena", "Branco", "Preto", "Pardo"]
     },
     "admissionDate": {
       "type": "date",
@@ -117,20 +103,12 @@
     },
     "contractType": {
       "type": "enumeration",
-      "enum": [
-        "Híbrido",
-        "Presencial",
-        "Home Office"
-      ],
+      "enum": ["Híbrido", "Presencial", "Home Office"],
       "required": false
     },
     "contractRegimen": {
       "type": "enumeration",
-      "enum": [
-        "CLT",
-        "PJ",
-        "Estágio"
-      ],
+      "enum": ["CLT", "PJ", "Estágio"],
       "required": false
     },
     "hasTransport": {

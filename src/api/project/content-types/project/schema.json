@@ -19,18 +19,6 @@
     "description": {
       "type": "blocks"
     },
-    "finishedAt": {
-      "type": "date"
-    },
-    "startedAt": {
-      "type": "date"
-    },
-    "work_activities": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::work-activity.work-activity",
-      "mappedBy": "project"
-    },
     "projectStatus": {
       "type": "enumeration",
       "enum": [
@@ -43,18 +31,6 @@
         "Concluído"
       ],
       "default": "Em planejamento"
-    },
-    "startsAtPreview": {
-      "type": "date",
-      "required": true
-    },
-    "endsAtPreview": {
-      "type": "date",
-      "required": true
-    },
-    "totalHours": {
-      "type": "integer",
-      "required": true
     },
     "dueDate": {
       "type": "date",
@@ -77,6 +53,25 @@
       "relation": "oneToMany",
       "target": "api::allocation.allocation",
       "mappedBy": "project"
+    },
+    "work_activities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::work-activity.work-activity",
+      "mappedBy": "project"
+    },
+    "register_hours": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::register-hour.register-hour",
+      "mappedBy": "project"
+    },
+    "startDate": {
+      "type": "date",
+      "required": false
+    },
+    "endDate": {
+      "type": "date"
     }
   }
 }

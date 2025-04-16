@@ -30,16 +30,22 @@
       "target": "api::wefiter.wefiter",
       "inversedBy": "work_profiles"
     },
-    "register_hours": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::register-hour.register-hour",
-      "mappedBy": "work_profile"
-    },
     "allocations": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::allocation.allocation",
+      "mappedBy": "work_profile"
+    },
+    "work_activity_estimatives": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::work-activity-estimative.work-activity-estimative",
+      "mappedBy": "work_profile"
+    },
+    "register_hours": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::register-hour.register-hour",
       "mappedBy": "work_profile"
     }
   }

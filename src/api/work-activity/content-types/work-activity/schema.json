@@ -15,9 +15,8 @@
       "type": "string",
       "required": true
     },
-    "currentEstimatedHours": {
-      "type": "integer",
-      "required": true
+    "details": {
+      "type": "blocks"
     },
     "project": {
       "type": "relation",
@@ -25,8 +24,11 @@
       "target": "api::project.project",
       "inversedBy": "work_activities"
     },
-    "details": {
-      "type": "blocks"
+    "project_sections": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::project-section.project-section",
+      "inversedBy": "work_activities"
     },
     "activity_status": {
       "type": "relation",
@@ -34,20 +36,16 @@
       "target": "api::activity-status.activity-status",
       "inversedBy": "work_activities"
     },
+    "work_activity_estimatives": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::work-activity-estimative.work-activity-estimative",
+      "mappedBy": "work_activity"
+    },
     "register_hours": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::register-hour.register-hour",
-      "mappedBy": "work_activity"
-    },
-    "initialEstimatedHours": {
-      "type": "integer",
-      "required": true
-    },
-    "project_sections": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::project-section.project-section",
       "mappedBy": "work_activity"
     }
   }

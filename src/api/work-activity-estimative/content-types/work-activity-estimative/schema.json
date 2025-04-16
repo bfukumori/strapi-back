@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "work_activity_estimatives",
+  "info": {
+    "singularName": "work-activity-estimative",
+    "pluralName": "work-activity-estimatives",
+    "displayName": "Work Activity Estimative",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "estimatedHours": {
+      "type": "integer",
+      "required": true
+    },
+    "work_profile": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::work-profile.work-profile",
+      "inversedBy": "work_activity_estimatives"
+    },
+    "work_activity": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::work-activity.work-activity",
+      "inversedBy": "work_activity_estimatives"
+    },
+    "adjustedEstimate": {
+      "type": "integer"
+    },
+    "dateOfAdjustment": {
+      "type": "date"
+    }
+  }
+}
