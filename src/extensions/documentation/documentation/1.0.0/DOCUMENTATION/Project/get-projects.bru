@@ -1,0 +1,24 @@
+meta {
+  name: get/projects
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/projects
+  body: none
+  auth: none
+}
+
+params:query {
+  ~sort: 
+  ~pagination[withCount]: 
+  ~pagination[page]: 
+  ~pagination[pageSize]: 
+  ~pagination[start]: 
+  ~pagination[limit]: 
+  ~fields: 
+  ~populate: 
+  ~filters: 
+  ~locale: 
+}

@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "task_hours",
+  "info": {
+    "singularName": "task-hour",
+    "pluralName": "task-hours",
+    "displayName": "Task Hour",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "hours": {
+      "type": "integer",
+      "required": true
+    },
+    "wefiter": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::wefiter.wefiter",
+      "inversedBy": "task_hours"
+    },
+    "sub_task": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::sub-task.sub-task",
+      "inversedBy": "task_hours"
+    }
+  }
+}

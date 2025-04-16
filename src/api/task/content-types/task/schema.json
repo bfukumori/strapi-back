@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tasks",
+  "info": {
+    "singularName": "task",
+    "pluralName": "tasks",
+    "displayName": "Task",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "initalEstimatedHours": {
+      "type": "integer",
+      "required": true
+    },
+    "feature": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::feature.feature",
+      "inversedBy": "tasks"
+    },
+    "task_profile": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::task-profile.task-profile",
+      "inversedBy": "tasks"
+    },
+    "task_status": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::task-status.task-status",
+      "inversedBy": "tasks"
+    },
+    "sub_tasks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::sub-task.sub-task",
+      "mappedBy": "task"
+    }
+  }
+}

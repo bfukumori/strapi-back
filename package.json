@@ -10,17 +10,18 @@
     "deploy": "strapi deploy",
     "dev": "strapi develop",
     "develop": "strapi develop",
-    "seed": "node ./scripts/seed.js",
+    "seed:db": "node ./scripts/seed.js",
+    "clear:db": "rm -rf ./.tmp/*.db",
     "start": "strapi start",
     "strapi": "strapi",
     "upgrade": "pnpm dlx @strapi/upgrade latest",
     "upgrade:dry": "pnpm dlx @strapi/upgrade latest --dry"
   },
   "dependencies": {
-    "@strapi/plugin-cloud": "5.12.4",
-    "@strapi/plugin-documentation": "^5.12.4",
-    "@strapi/plugin-users-permissions": "5.12.4",
-    "@strapi/strapi": "5.12.4",
+    "@strapi/plugin-cloud": "5.12.5",
+    "@strapi/plugin-documentation": "^5.12.5",
+    "@strapi/plugin-users-permissions": "5.12.5",
+    "@strapi/strapi": "5.12.5",
     "better-sqlite3": "11.9.1",
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
@@ -37,7 +38,7 @@
     "@types/react": "^18.3.20",
     "@types/react-dom": "^18.3.6",
     "typescript": "^5.8.3",
-    "vite": "^6.2.6"
+    "vite": "^6.3.0"
   },
   "engines": {
     "node": ">=18.0.0 <=22.x.x",
@@ -46,5 +47,5 @@
   "strapi": {
     "uuid": "a2217ce8-236f-437a-8c54-489c9f3d90ab"
   },
-  "packageManager": "pnpm@10.8.0"
+  "packageManager": "pnpm@10.8.1"
 }

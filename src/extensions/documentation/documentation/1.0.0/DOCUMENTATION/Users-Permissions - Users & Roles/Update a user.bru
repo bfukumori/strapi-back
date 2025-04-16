@@ -1,0 +1,27 @@
+meta {
+  name: Update a user
+  type: http
+  seq: 10
+}
+
+put {
+  url: {{baseUrl}}/users/:id
+  body: json
+  auth: bearer
+}
+
+params:path {
+  id: 
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "email": "",
+    "username": "",
+    "password": ""
+  }
+}

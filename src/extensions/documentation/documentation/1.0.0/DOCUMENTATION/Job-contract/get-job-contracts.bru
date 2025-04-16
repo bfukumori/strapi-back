@@ -1,0 +1,28 @@
+meta {
+  name: get/job-contracts
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/job-contracts
+  body: none
+  auth: bearer
+}
+
+params:query {
+  ~sort: 
+  ~pagination[withCount]: 
+  ~pagination[page]: 
+  ~pagination[pageSize]: 
+  ~pagination[start]: 
+  ~pagination[limit]: 
+  ~fields: 
+  ~populate: 
+  ~filters: 
+  ~locale: 
+}
+
+auth:bearer {
+  token: {{token}}
+}

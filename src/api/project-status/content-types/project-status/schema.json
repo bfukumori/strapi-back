@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "project_statuses",
+  "info": {
+    "singularName": "project-status",
+    "pluralName": "project-statuses",
+    "displayName": "Project Status",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "color": {
+      "type": "string",
+      "required": true
+    },
+    "projects": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::project.project",
+      "mappedBy": "project_status"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+meta {
+  name: post/activity-statuses
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/activity-statuses
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "data": {
+      "label": "",
+      "color": "",
+      "work_activities": [],
+      "locale": "",
+      "localizations": []
+    }
+  }
+}

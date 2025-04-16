@@ -1,0 +1,29 @@
+meta {
+  name: post/work-activity-estimatives
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/work-activity-estimatives
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "data": {
+      "estimatedHours": "",
+      "work_profile": "",
+      "work_activity": "",
+      "adjustedEstimate": "",
+      "dateOfAdjustment": "",
+      "locale": "",
+      "localizations": []
+    }
+  }
+}

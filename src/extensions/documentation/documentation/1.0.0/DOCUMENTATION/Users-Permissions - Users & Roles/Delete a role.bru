@@ -1,0 +1,19 @@
+meta {
+  name: Delete a role
+  type: http
+  seq: 6
+}
+
+delete {
+  url: {{baseUrl}}/users-permissions/roles/:role
+  body: none
+  auth: bearer
+}
+
+params:path {
+  role: 
+}
+
+auth:bearer {
+  token: {{token}}
+}

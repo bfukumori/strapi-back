@@ -369,50 +369,13 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiActivityStatusActivityStatus
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'activity_statuses';
+export interface ApiFeatureFeature extends Struct.CollectionTypeSchema {
+  collectionName: 'features';
   info: {
     description: '';
-    displayName: 'Activity Status';
-    pluralName: 'activity-statuses';
-    singularName: 'activity-status';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    color: Schema.Attribute.String & Schema.Attribute.Required;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    label: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::activity-status.activity-status'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    work_activities: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::work-activity.work-activity'
-    >;
-  };
-}
-
-export interface ApiAllocationAllocation extends Struct.CollectionTypeSchema {
-  collectionName: 'allocations';
-  info: {
-    description: '';
-    displayName: 'Allocation';
-    pluralName: 'allocations';
-    singularName: 'allocation';
+    displayName: 'Feature';
+    pluralName: 'features';
+    singularName: 'feature';
   };
   options: {
     draftAndPublish: true;
@@ -421,40 +384,23 @@ export interface ApiAllocationAllocation extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    hoursPerDay: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 8;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<8>;
+    description: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::allocation.allocation'
+      'api::feature.feature'
     > &
       Schema.Attribute.Private;
-    project: Schema.Attribute.Relation<'manyToOne', 'api::project.project'>;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    wefiter: Schema.Attribute.Relation<'manyToOne', 'api::wefiter.wefiter'>;
-    work_profile: Schema.Attribute.Relation<
+    project_module: Schema.Attribute.Relation<
       'manyToOne',
-      'api::work-profile.work-profile'
+      'api::project-module.project-module'
     >;
-    workDaysPerWeek: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 5;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<5>;
+    publishedAt: Schema.Attribute.DateTime;
+    tasks: Schema.Attribute.Relation<'oneToMany', 'api::task.task'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -538,14 +484,49 @@ export interface ApiJobContractJobContract extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiProjectSectionProjectSection
+export interface ApiProjectModuleProjectModule
   extends Struct.CollectionTypeSchema {
-  collectionName: 'project_sections';
+  collectionName: 'project_modules';
   info: {
     description: '';
-    displayName: 'Project Section';
-    pluralName: 'project-sections';
-    singularName: 'project-section';
+    displayName: 'Project Module';
+    pluralName: 'project-modules';
+    singularName: 'project-module';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    features: Schema.Attribute.Relation<'oneToMany', 'api::feature.feature'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::project-module.project-module'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    project_scope: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::project-scope.project-scope'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiProjectScopeProjectScope
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'project_scopes';
+  info: {
+    description: '';
+    displayName: 'Project Scope';
+    pluralName: 'project-scopes';
+    singularName: 'project-scope';
   };
   options: {
     draftAndPublish: true;
@@ -557,23 +538,51 @@ export interface ApiProjectSectionProjectSection
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::project-section.project-section'
+      'api::project-scope.project-scope'
     > &
       Schema.Attribute.Private;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
     project: Schema.Attribute.Relation<'manyToOne', 'api::project.project'>;
-    publishedAt: Schema.Attribute.DateTime;
-    register_hours: Schema.Attribute.Relation<
+    project_modules: Schema.Attribute.Relation<
       'oneToMany',
-      'api::register-hour.register-hour'
+      'api::project-module.project-module'
     >;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    work_activities: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::work-activity.work-activity'
-    >;
+  };
+}
+
+export interface ApiProjectStatusProjectStatus
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'project_statuses';
+  info: {
+    description: '';
+    displayName: 'Project Status';
+    pluralName: 'project-statuses';
+    singularName: 'project-status';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    color: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::project-status.project-status'
+    > &
+      Schema.Attribute.Private;
+    projects: Schema.Attribute.Relation<'oneToMany', 'api::project.project'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -589,10 +598,6 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    allocations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::allocation.allocation'
-    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -606,27 +611,15 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String & Schema.Attribute.Required;
-    project_sections: Schema.Attribute.Relation<
+    project_scopes: Schema.Attribute.Relation<
       'oneToMany',
-      'api::project-section.project-section'
+      'api::project-scope.project-scope'
     >;
-    projectStatus: Schema.Attribute.Enumeration<
-      [
-        'Em planejamento',
-        'Em andamento',
-        'Em valida\u00E7\u00E3o',
-        'Aguardando aprova\u00E7\u00E3o',
-        'Pausado',
-        'Cancelado',
-        'Conclu\u00EDdo',
-      ]
-    > &
-      Schema.Attribute.DefaultTo<'Em planejamento'>;
+    project_status: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::project-status.project-status'
+    >;
     publishedAt: Schema.Attribute.DateTime;
-    register_hours: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::register-hour.register-hour'
-    >;
     stakeholder: Schema.Attribute.Relation<
       'manyToOne',
       'api::stakeholder.stakeholder'
@@ -635,55 +628,6 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    work_activities: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::work-activity.work-activity'
-    >;
-  };
-}
-
-export interface ApiRegisterHourRegisterHour
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'register_hours';
-  info: {
-    description: '';
-    displayName: 'Register Hour';
-    pluralName: 'register-hours';
-    singularName: 'register-hour';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    date: Schema.Attribute.Date & Schema.Attribute.Required;
-    executedHours: Schema.Attribute.Integer & Schema.Attribute.Required;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::register-hour.register-hour'
-    > &
-      Schema.Attribute.Private;
-    project: Schema.Attribute.Relation<'manyToOne', 'api::project.project'>;
-    project_section: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::project-section.project-section'
-    >;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    wefiter: Schema.Attribute.Relation<'manyToOne', 'api::wefiter.wefiter'>;
-    work_activity: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::work-activity.work-activity'
-    >;
-    work_profile: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::work-profile.work-profile'
-    >;
   };
 }
 
@@ -719,6 +663,179 @@ export interface ApiStakeholderStakeholder extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiSubTaskSubTask extends Struct.CollectionTypeSchema {
+  collectionName: 'sub_tasks';
+  info: {
+    description: '';
+    displayName: 'Sub Task';
+    pluralName: 'sub-tasks';
+    singularName: 'sub-task';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    initialEstimateHours: Schema.Attribute.Integer & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::sub-task.sub-task'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    remainingHours: Schema.Attribute.Integer & Schema.Attribute.Required;
+    task: Schema.Attribute.Relation<'manyToOne', 'api::task.task'>;
+    task_hours: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::task-hour.task-hour'
+    >;
+    task_status: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::task-status.task-status'
+    >;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTaskHourTaskHour extends Struct.CollectionTypeSchema {
+  collectionName: 'task_hours';
+  info: {
+    description: '';
+    displayName: 'Task Hour';
+    pluralName: 'task-hours';
+    singularName: 'task-hour';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    date: Schema.Attribute.Date & Schema.Attribute.Required;
+    hours: Schema.Attribute.Integer & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::task-hour.task-hour'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    sub_task: Schema.Attribute.Relation<'manyToOne', 'api::sub-task.sub-task'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    wefiter: Schema.Attribute.Relation<'manyToOne', 'api::wefiter.wefiter'>;
+  };
+}
+
+export interface ApiTaskProfileTaskProfile extends Struct.CollectionTypeSchema {
+  collectionName: 'task_profiles';
+  info: {
+    description: '';
+    displayName: 'Task Profile';
+    pluralName: 'task-profiles';
+    singularName: 'task-profile';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    bgColor: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::task-profile.task-profile'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    tasks: Schema.Attribute.Relation<'oneToMany', 'api::task.task'>;
+    textColor: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTaskStatusTaskStatus extends Struct.CollectionTypeSchema {
+  collectionName: 'task_statuses';
+  info: {
+    displayName: 'Task Status';
+    pluralName: 'task-statuses';
+    singularName: 'task-status';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    color: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::task-status.task-status'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    sub_tasks: Schema.Attribute.Relation<'oneToMany', 'api::sub-task.sub-task'>;
+    tasks: Schema.Attribute.Relation<'oneToMany', 'api::task.task'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTaskTask extends Struct.CollectionTypeSchema {
+  collectionName: 'tasks';
+  info: {
+    description: '';
+    displayName: 'Task';
+    pluralName: 'tasks';
+    singularName: 'task';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    feature: Schema.Attribute.Relation<'manyToOne', 'api::feature.feature'>;
+    initalEstimatedHours: Schema.Attribute.Integer & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::task.task'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    sub_tasks: Schema.Attribute.Relation<'oneToMany', 'api::sub-task.sub-task'>;
+    task_profile: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::task-profile.task-profile'
+    >;
+    task_status: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::task-status.task-status'
+    >;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiWefiterWefiter extends Struct.CollectionTypeSchema {
   collectionName: 'wefiters';
   info: {
@@ -731,10 +848,6 @@ export interface ApiWefiterWefiter extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    allocations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::allocation.allocation'
-    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -758,155 +871,17 @@ export interface ApiWefiterWefiter extends Struct.CollectionTypeSchema {
     phone: Schema.Attribute.String & Schema.Attribute.Unique;
     privateEmail: Schema.Attribute.Email & Schema.Attribute.Unique;
     publishedAt: Schema.Attribute.DateTime;
-    register_hours: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::register-hour.register-hour'
-    >;
     socialName: Schema.Attribute.String;
+    task_hours: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::task-hour.task-hour'
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     users_permissions_user: Schema.Attribute.Relation<
       'oneToOne',
       'plugin::users-permissions.user'
-    >;
-    work_profiles: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::work-profile.work-profile'
-    >;
-  };
-}
-
-export interface ApiWorkActivityEstimativeWorkActivityEstimative
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'work_activity_estimatives';
-  info: {
-    description: '';
-    displayName: 'Work Activity Estimative';
-    pluralName: 'work-activity-estimatives';
-    singularName: 'work-activity-estimative';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    adjustedEstimate: Schema.Attribute.Integer;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    dateOfAdjustment: Schema.Attribute.Date;
-    estimatedHours: Schema.Attribute.Integer & Schema.Attribute.Required;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::work-activity-estimative.work-activity-estimative'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    work_activity: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::work-activity.work-activity'
-    >;
-    work_profile: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::work-profile.work-profile'
-    >;
-  };
-}
-
-export interface ApiWorkActivityWorkActivity
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'work_activities';
-  info: {
-    description: '';
-    displayName: 'Work Activity';
-    pluralName: 'work-activities';
-    singularName: 'work-activity';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    activity_status: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::activity-status.activity-status'
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    details: Schema.Attribute.Blocks;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::work-activity.work-activity'
-    > &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
-    project: Schema.Attribute.Relation<'manyToOne', 'api::project.project'>;
-    project_sections: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::project-section.project-section'
-    >;
-    publishedAt: Schema.Attribute.DateTime;
-    register_hours: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::register-hour.register-hour'
-    >;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    work_activity_estimatives: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::work-activity-estimative.work-activity-estimative'
-    >;
-  };
-}
-
-export interface ApiWorkProfileWorkProfile extends Struct.CollectionTypeSchema {
-  collectionName: 'work_profiles';
-  info: {
-    description: '';
-    displayName: 'Work Profile';
-    pluralName: 'work-profiles';
-    singularName: 'work-profile';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    allocations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::allocation.allocation'
-    >;
-    bgColor: Schema.Attribute.String & Schema.Attribute.Required;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::work-profile.work-profile'
-    > &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    publishedAt: Schema.Attribute.DateTime;
-    register_hours: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::register-hour.register-hour'
-    >;
-    textColor: Schema.Attribute.String & Schema.Attribute.Required;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    wefiters: Schema.Attribute.Relation<'manyToMany', 'api::wefiter.wefiter'>;
-    work_activity_estimatives: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::work-activity-estimative.work-activity-estimative'
     >;
   };
 }
@@ -1421,17 +1396,19 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::activity-status.activity-status': ApiActivityStatusActivityStatus;
-      'api::allocation.allocation': ApiAllocationAllocation;
+      'api::feature.feature': ApiFeatureFeature;
       'api::job-contract.job-contract': ApiJobContractJobContract;
-      'api::project-section.project-section': ApiProjectSectionProjectSection;
+      'api::project-module.project-module': ApiProjectModuleProjectModule;
+      'api::project-scope.project-scope': ApiProjectScopeProjectScope;
+      'api::project-status.project-status': ApiProjectStatusProjectStatus;
       'api::project.project': ApiProjectProject;
-      'api::register-hour.register-hour': ApiRegisterHourRegisterHour;
       'api::stakeholder.stakeholder': ApiStakeholderStakeholder;
+      'api::sub-task.sub-task': ApiSubTaskSubTask;
+      'api::task-hour.task-hour': ApiTaskHourTaskHour;
+      'api::task-profile.task-profile': ApiTaskProfileTaskProfile;
+      'api::task-status.task-status': ApiTaskStatusTaskStatus;
+      'api::task.task': ApiTaskTask;
       'api::wefiter.wefiter': ApiWefiterWefiter;
-      'api::work-activity-estimative.work-activity-estimative': ApiWorkActivityEstimativeWorkActivityEstimative;
-      'api::work-activity.work-activity': ApiWorkActivityWorkActivity;
-      'api::work-profile.work-profile': ApiWorkProfileWorkProfile;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

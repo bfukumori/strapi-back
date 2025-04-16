@@ -19,52 +19,9 @@
     "description": {
       "type": "blocks"
     },
-    "projectStatus": {
-      "type": "enumeration",
-      "enum": [
-        "Em planejamento",
-        "Em andamento",
-        "Em validação",
-        "Aguardando aprovação",
-        "Pausado",
-        "Cancelado",
-        "Concluído"
-      ],
-      "default": "Em planejamento"
-    },
     "dueDate": {
       "type": "date",
       "required": true
-    },
-    "project_sections": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::project-section.project-section",
-      "mappedBy": "project"
-    },
-    "stakeholder": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::stakeholder.stakeholder",
-      "inversedBy": "projects"
-    },
-    "allocations": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::allocation.allocation",
-      "mappedBy": "project"
-    },
-    "work_activities": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::work-activity.work-activity",
-      "mappedBy": "project"
-    },
-    "register_hours": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::register-hour.register-hour",
-      "mappedBy": "project"
     },
     "startDate": {
       "type": "date",
@@ -72,6 +29,24 @@
     },
     "endDate": {
       "type": "date"
+    },
+    "stakeholder": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::stakeholder.stakeholder",
+      "inversedBy": "projects"
+    },
+    "project_status": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project-status.project-status",
+      "inversedBy": "projects"
+    },
+    "project_scopes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::project-scope.project-scope",
+      "mappedBy": "project"
     }
   }
 }

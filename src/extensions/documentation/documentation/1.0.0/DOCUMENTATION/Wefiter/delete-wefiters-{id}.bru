@@ -1,0 +1,19 @@
+meta {
+  name: delete/wefiters/{id}
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/wefiters/:id
+  body: none
+  auth: bearer
+}
+
+params:path {
+  id: 
+}
+
+auth:bearer {
+  token: {{token}}
+}

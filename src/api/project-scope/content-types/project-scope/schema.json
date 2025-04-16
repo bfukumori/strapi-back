@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "project_scopes",
+  "info": {
+    "singularName": "project-scope",
+    "pluralName": "project-scopes",
+    "displayName": "Project Scope",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "project_modules": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::project-module.project-module",
+      "mappedBy": "project_scope"
+    },
+    "project": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project.project",
+      "inversedBy": "project_scopes"
+    }
+  }
+}

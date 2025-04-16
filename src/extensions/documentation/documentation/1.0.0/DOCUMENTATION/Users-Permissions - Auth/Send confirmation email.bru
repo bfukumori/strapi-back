@@ -1,0 +1,21 @@
+meta {
+  name: Send confirmation email
+  type: http
+  seq: 9
+}
+
+post {
+  url: {{baseUrl}}/auth/send-email-confirmation
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "email": ""
+  }
+}

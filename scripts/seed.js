@@ -1,6 +1,13 @@
 'use strict';
 
-const { activityStatuses, workProfiles } = require('../data/data.json');
+const {
+  taskStatuses,
+  taskProfiles,
+  projectStatuses,
+  projectScopes,
+  stakeholders,
+  wefiters,
+} = require('../data/data.json');
 
 async function seedData() {
   const shouldImportSeedData = await isFirstRun();
@@ -68,35 +75,65 @@ async function createEntry({ model, entry }) {
   }
 }
 
-async function importActivityStatuses() {
-  for (const status of activityStatuses) {
-    await createEntry({ model: 'activity-status', entry: status });
+async function importWefiters() {
+  for (const wefiter of wefiters) {
+    await createEntry({ model: 'wefiter', entry: wefiter });
+  }
+}
+async function importTaskStatuses() {
+  for (const status of taskStatuses) {
+    await createEntry({ model: 'task-status', entry: status });
   }
 }
 
-async function importWorkProfiles() {
-  for (const profile of workProfiles) {
-    await createEntry({ model: 'work-profile', entry: profile });
+async function importTaskProfiles() {
+  for (const profile of taskProfiles) {
+    await createEntry({ model: 'task-profile', entry: profile });
+  }
+}
+
+async function importProjectStatuses() {
+  for (const status of projectStatuses) {
+    await createEntry({ model: 'project-status', entry: status });
+  }
+}
+
+async function importProjectScopes() {
+  for (const scope of projectScopes) {
+    await createEntry({ model: 'project-scope', entry: scope });
+  }
+}
+
+async function importStakeholders() {
+  for (const stakeholder of stakeholders) {
+    await createEntry({ model: 'stakeholder', entry: stakeholder });
   }
 }
 
 async function importSeedData() {
-  await setPublicPermissions({
-    'activity-status': ['find', 'findOne'],
-    allocation: ['find', 'findOne'],
-    'job-contract': ['find', 'findOne'],
-    project: ['find', 'findOne'],
-    'project-section': ['find', 'findOne'],
-    'register-hour': ['find', 'findOne'],
-    stakeholder: ['find', 'findOne'],
-    wefiter: ['find', 'findOne'],
-    'work-activity': ['find', 'findOne'],
-    'work-activity-estimative': ['find', 'findOne'],
-    'work-profile': ['find', 'findOne'],
-  });
-
-  await importActivityStatuses();
-  await importWorkProfiles();
+  await Promise.all([
+    importWefiters(),
+    importTaskProfiles(),
+    importTaskStatuses(),
+    importProjectStatuses(),
+    importProjectScopes(),
+    importStakeholders(),
+    setPublicPermissions({
+      feature: ['find', 'findOne'],
+      'job-contract': ['find', 'findOne'],
+      project: ['find', 'findOne'],
+      'project-module': ['find', 'findOne'],
+      'project-scope': ['find', 'findOne'],
+      'project-status': ['find', 'findOne'],
+      stakeholder: ['find', 'findOne'],
+      'sub-task': ['find', 'findOne'],
+      task: ['find', 'findOne'],
+      'task-hour': ['find', 'findOne'],
+      'task-profile': ['find', 'findOne'],
+      'task-status': ['find', 'findOne'],
+      wefiter: ['find', 'findOne'],
+    }),
+  ]);
 }
 
 async function main() {

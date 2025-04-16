@@ -1,0 +1,35 @@
+meta {
+  name: put/work-profiles/{id}
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/work-profiles/:id
+  body: json
+  auth: bearer
+}
+
+params:path {
+  id: 
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "data": {
+      "name": "",
+      "bgColor": "",
+      "textColor": "",
+      "wefiters": [],
+      "allocations": [],
+      "work_activity_estimatives": [],
+      "register_hours": [],
+      "locale": "",
+      "localizations": []
+    }
+  }
+}

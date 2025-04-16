@@ -38,7 +38,11 @@
     },
     "gender": {
       "type": "enumeration",
-      "enum": ["Masculino", "Feminino", "Não-binário"]
+      "enum": [
+        "Masculino",
+        "Feminino",
+        "Não-binário"
+      ]
     },
     "socialName": {
       "type": "string"
@@ -53,23 +57,11 @@
       "target": "api::job-contract.job-contract",
       "mappedBy": "wefiter"
     },
-    "register_hours": {
+    "task_hours": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::register-hour.register-hour",
+      "target": "api::task-hour.task-hour",
       "mappedBy": "wefiter"
-    },
-    "allocations": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::allocation.allocation",
-      "mappedBy": "wefiter"
-    },
-    "work_profiles": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::work-profile.work-profile",
-      "mappedBy": "wefiters"
     }
   }
 }

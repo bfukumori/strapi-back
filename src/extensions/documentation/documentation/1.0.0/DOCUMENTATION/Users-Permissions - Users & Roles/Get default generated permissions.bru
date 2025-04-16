@@ -1,0 +1,15 @@
+meta {
+  name: Get default generated permissions
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/users-permissions/permissions
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}

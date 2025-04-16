@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "task_profiles",
+  "info": {
+    "singularName": "task-profile",
+    "pluralName": "task-profiles",
+    "displayName": "Task Profile",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "bgColor": {
+      "type": "string",
+      "required": true
+    },
+    "textColor": {
+      "type": "string",
+      "required": true
+    },
+    "tasks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::task.task",
+      "mappedBy": "task_profile"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+meta {
+  name: put/project-sections/{id}
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/project-sections/:id
+  body: json
+  auth: bearer
+}
+
+params:path {
+  id: 
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "data": {
+      "name": "",
+      "project": "",
+      "work_activities": [],
+      "register_hours": [],
+      "locale": "",
+      "localizations": []
+    }
+  }
+}

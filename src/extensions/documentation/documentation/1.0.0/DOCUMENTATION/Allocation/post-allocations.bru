@@ -1,0 +1,29 @@
+meta {
+  name: post/allocations
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/allocations
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "data": {
+      "hoursPerDay": "",
+      "project": "",
+      "wefiter": "",
+      "work_profile": "",
+      "workDaysPerWeek": "",
+      "locale": "",
+      "localizations": []
+    }
+  }
+}

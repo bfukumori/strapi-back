@@ -1,0 +1,19 @@
+meta {
+  name: Login with a provider
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/connect/:provider
+  body: none
+  auth: bearer
+}
+
+params:path {
+  provider: 
+}
+
+auth:bearer {
+  token: {{token}}
+}

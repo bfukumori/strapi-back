@@ -1,0 +1,41 @@
+meta {
+  name: put/wefiters/{id}
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/wefiters/:id
+  body: json
+  auth: bearer
+}
+
+params:path {
+  id: 
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "data": {
+      "name": "",
+      "dob": "",
+      "users_permissions_user": "",
+      "phone": "",
+      "privateEmail": "",
+      "discordId": "",
+      "gender": "",
+      "socialName": "",
+      "isPartner": "",
+      "job_contract": "",
+      "register_hours": [],
+      "allocations": [],
+      "work_profiles": [],
+      "locale": "",
+      "localizations": []
+    }
+  }
+}

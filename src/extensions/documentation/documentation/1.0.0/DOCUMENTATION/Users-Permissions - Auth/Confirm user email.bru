@@ -1,0 +1,19 @@
+meta {
+  name: Confirm user email
+  type: http
+  seq: 8
+}
+
+get {
+  url: {{baseUrl}}/auth/email-confirmation
+  body: none
+  auth: bearer
+}
+
+params:query {
+  ~confirmation: 
+}
+
+auth:bearer {
+  token: {{token}}
+}

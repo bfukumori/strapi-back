@@ -1,0 +1,19 @@
+meta {
+  name: Default Callback from provider auth
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/auth/:provider/callback
+  body: none
+  auth: bearer
+}
+
+params:path {
+  provider: 
+}
+
+auth:bearer {
+  token: {{token}}
+}

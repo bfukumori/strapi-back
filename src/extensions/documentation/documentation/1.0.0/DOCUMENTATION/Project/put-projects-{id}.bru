@@ -1,0 +1,39 @@
+meta {
+  name: put/projects/{id}
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/projects/:id
+  body: json
+  auth: bearer
+}
+
+params:path {
+  id: 
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "data": {
+      "name": "",
+      "description": "",
+      "projectStatus": "",
+      "dueDate": "",
+      "project_sections": [],
+      "stakeholder": "",
+      "allocations": [],
+      "work_activities": [],
+      "register_hours": [],
+      "startDate": "",
+      "endDate": "",
+      "locale": "",
+      "localizations": []
+    }
+  }
+}

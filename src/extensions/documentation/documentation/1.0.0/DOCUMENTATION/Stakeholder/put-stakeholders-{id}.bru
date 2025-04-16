@@ -1,0 +1,30 @@
+meta {
+  name: put/stakeholders/{id}
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/stakeholders/:id
+  body: json
+  auth: bearer
+}
+
+params:path {
+  id: 
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "data": {
+      "name": "",
+      "projects": [],
+      "locale": "",
+      "localizations": []
+    }
+  }
+}

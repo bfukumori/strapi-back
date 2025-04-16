@@ -1,0 +1,28 @@
+meta {
+  name: post/project-sections
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/project-sections
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "data": {
+      "name": "",
+      "project": "",
+      "work_activities": [],
+      "register_hours": [],
+      "locale": "",
+      "localizations": []
+    }
+  }
+}

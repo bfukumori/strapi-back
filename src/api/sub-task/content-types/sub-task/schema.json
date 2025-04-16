@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sub_tasks",
+  "info": {
+    "singularName": "sub-task",
+    "pluralName": "sub-tasks",
+    "displayName": "Sub Task",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": false
+    },
+    "initialEstimateHours": {
+      "type": "integer",
+      "required": true
+    },
+    "remainingHours": {
+      "type": "integer",
+      "required": true
+    },
+    "task_hours": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::task-hour.task-hour",
+      "mappedBy": "sub_task"
+    },
+    "task_status": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::task-status.task-status",
+      "inversedBy": "sub_tasks"
+    },
+    "task": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::task.task",
+      "inversedBy": "sub_tasks"
+    }
+  }
+}
