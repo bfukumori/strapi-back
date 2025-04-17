@@ -1,11 +1,13 @@
 export function calculateBusinessDays(
-  startDate: string,
-  daysNeeded: number,
+  startDate: Date | string,
+  totalHours: number,
+  hoursPerDay: number,
   holydays: string[]
 ) {
-  let date = new Date(startDate);
+  const date = new Date(startDate);
+  let remainingHours = totalHours;
 
-  while (daysNeeded > 0) {
+  while (remainingHours > 0) {
     date.setDate(date.getDate() + 1);
 
     const dayOfWeek = date.getDay();
@@ -13,7 +15,7 @@ export function calculateBusinessDays(
     const isHoliday = holydays.includes(date.toISOString().split('T')[0]);
 
     if (!isWeekend && !isHoliday) {
-      daysNeeded--;
+      remainingHours -= hoursPerDay;
     }
   }
 
