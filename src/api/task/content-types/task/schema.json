@@ -15,7 +15,7 @@
       "type": "string",
       "required": true
     },
-    "initalEstimatedHours": {
+    "initialEstimatedHours": {
       "type": "integer",
       "required": true
     },

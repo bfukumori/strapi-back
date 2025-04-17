@@ -23,12 +23,12 @@ export function calculateProgress(
       for (const feature of _module.features) {
         for (const task of feature.tasks) {
           if (task.sub_tasks.length === 0) {
-            totalEstimated += task.initalEstimatedHours;
-            totalRemaining += task.initalEstimatedHours;
+            totalEstimated += task.initialEstimatedHours;
+            totalRemaining += task.initialEstimatedHours;
 
             if (hasPeriod) {
-              totalEstimatedPeriod += task.initalEstimatedHours;
-              totalRemainingPeriod += task.initalEstimatedHours;
+              totalEstimatedPeriod += task.initialEstimatedHours;
+              totalRemainingPeriod += task.initialEstimatedHours;
             }
           }
 
@@ -39,13 +39,13 @@ export function calculateProgress(
             let subtaskInPeriod = false;
 
             for (const taskHour of subtask.task_hours) {
-              const hour = taskHour.hours;
+              const hours = taskHour.hours;
               const hourDate = new Date(taskHour.date);
 
-              totalExecuted += hour;
+              totalExecuted += hours;
 
               if (hasPeriod && hourDate >= startDate! && hourDate <= endDate!) {
-                totalExecutedPeriod += hour;
+                totalExecutedPeriod += hours;
                 subtaskInPeriod = true;
               }
             }
